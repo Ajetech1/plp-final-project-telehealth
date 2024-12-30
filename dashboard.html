@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baba Telehealth Dashboard</title>
+    <link rel="stylesheet" href="public/css/dashboad.css" />
+    <script
+      src="https://kit.fontawesome.com/38b421c4ae.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="sidebar">
+      <ul class="nav" id="sidemenu">
+        <div class="logo">
+          <a href="/"><img src="/public/img/nav-logo.svg" alt="logo" /></a>
+        </div>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="#">Consultation</a></li>
+        <li><a href="#">Appointments</a></li>
+        <li><a href="#">Messaging</a></li>
+        <li><a href="#">Payment History</a></li>
+        <i class="fas fa-times" onclick="closeMenu()"></i>
+      </ul>
+      <i class="fas fa-bars" style="margin-top: 18px" onclick="openMenu()"></i>
+    </div>
+    <div class="main-content">
+      <header class="header">
+        <h3 class="title">Dashboard</h3>
+        <!-- Buttons will appear in header on large screens -->
+        <button class="button urgent-care">Urgent Care</button>
+        <button class="button book-now">Book Now</button>
+        <div class="icons">
+          <span class="notification-icon"
+            ><img src="public/icons/noti.png" alt=""
+          /></span>
+          <span class="user-icon" id="logout-button"
+            ><img src="public/icons/userIcon.png" alt=""
+          /></span>
+        </div>
+      </header>
+      <!-- Buttons will appear outside the header on small screens -->
+      <div class="button-container">
+        <button class="button urgent-care">Urgent Care</button>
+        <button class="button book-now">Book Now</button>
+      </div>
+      <div class="stats-container">
+        <div class="welcome">
+          <p>Hi, <span id="user-name"></span></p>
+        </div>
+        <div class="stats">
+          <div class="stat-box blue">
+            <h4>New</h4>
+            <h5>Consultation Requests</h5>
+            <p>0</p>
+          </div>
+          <div class="stat-box orange">
+            <h4>New</h4>
+            <h5>Appointment Requests</h5>
+            <p>0</p>
+          </div>
+          <div class="stat-box green">
+            <h4>Total</h4>
+            <h5>Consultations</h5>
+            <p>0</p>
+          </div>
+        </div>
+      </div>
+      <div class="notifications">
+        <h2>Don't Forget</h2>
+        <p>No new notifications to note</p>
+      </div>
+    </div>
+    <script src="public/dashboardScript.js"></script>
+  </body>
+</html>

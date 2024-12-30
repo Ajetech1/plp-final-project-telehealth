@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Baba Telehealth Website</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/38b421c4ae.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="/img/nav-logo.svg" alt="Baba Telehealth Logo" />
+      </div>
+      <nav>
+        <ul id="sidemenu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Chat 24/7</a></li>
+          <li><a href="#">Urgent Care</a></li>
+          <li><a href="#">Consultation</a></li>
+          <li><a href="#">Join Us</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="/patient/login" class="login-btn">Signup / Login</a></li>
+          <i class="fas fa-times" onclick="closeMenu()"></i>
+        </ul>
+        <i class="fas fa-bars" onclick="openMenu()"></i>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-section">
+          <div class="hero-content">
+            <h2>Best Healthcare</h2>
+            <h1>Online Doctors<br />A few Clicks away!</h1>
+            <p>
+              Baba Telehealth provides a One-stop Health Solution. Contact a
+              doctor, healthcare professional, or specialist via text, video, or
+              phone
+            </p>
+            <div class="search-bar">
+              <input
+                type="text"
+                placeholder="Conditions, Procedures, Doctors"
+              />
+            </div>
+            <button>Search</button>
+            <span><a href="#" class="see-more">See More</a></span>
+          </div>
+          <div class="hero-image">
+            <img src="/img/location_img.svg" alt="Doctor" />
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="public/script.js"></script>
+  </body>
+</html>
