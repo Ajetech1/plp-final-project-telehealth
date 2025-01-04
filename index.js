@@ -13,7 +13,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // Set secure cookies in production
+      httpOnly: true,
+      sameSite: "strict", // Prevent CSRF attacks
+    },
   })
 );
 
