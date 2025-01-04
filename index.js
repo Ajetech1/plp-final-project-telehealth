@@ -48,10 +48,22 @@ app.get("/dashboard", (request, response) => {
   response.sendFile(path.join(__dirname, "dashboard.html"));
 });
 
-app.get("/api/dashboard", (req, res) => {
+// app.get("/api/dashboard", (req, res) => {
+//   if (!req.session.patient) {
+//     return res.status(401).json({ message: "Unauthorized. Please log in." });
+//   }
+//   res.json(req.session.patient);
+// });
+
+function authenticate(req, res, next) {
+  console.log("Session Data:", req.session);
   if (!req.session.patient) {
     return res.status(401).json({ message: "Unauthorized. Please log in." });
   }
+  next();
+}
+
+app.get("/api/dashboard", authenticate, (req, res) => {
   res.json(req.session.patient);
 });
 
@@ -61,6 +73,7 @@ app.post("/logout", (req, res) => {
     if (err) {
       return res.status(500).json({ message: "Failed to logout." });
     }
+    res.clearCookie("user_sid"); // Clear the session cookie
     res.status(200).json({ message: "Logout successful!" });
   });
 });

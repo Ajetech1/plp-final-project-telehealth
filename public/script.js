@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Disable the submit button to prevent double submission
       const submitButton = loginForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
-      submitButton.textContent = "Logging in...";
+      submitButton.textContent = "Signing in...";
 
       try {
         // Send the request to the server
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
           loginForm.reset(); // Clear the form on success
 
           // Store user data in localStorage
-          localStorage.setItem("patient", JSON.stringify(data));
+          // localStorage.setItem("patient", JSON.stringify(data));
 
           // Optional: Redirect to dashboard or home page
           window.location.href = "/dashboard";

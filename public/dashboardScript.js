@@ -12,10 +12,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         "user-name"
       ).textContent = `${patient.first_name} ${patient.last_name}`;
     } else {
-      window.location.href = "/"; // Redirect to login if unauthorized
+      const data = await response.json();
+      throw new Error(data.message || "Unauthorized");
     }
   } catch (error) {
     console.error("Error fetching user details:", error);
+    alert(error.message);
+    window.location.href = "/patient/login";
   }
 });
 
@@ -41,6 +44,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Dashboard unauthorized display alert
+
+// document.addEventListener("DOMContentLoaded", async function () {
+//   try {
+//     const response = await fetch("/api/dashboard");
+//     if (!response.ok) {
+//       const data = await response.json();
+//       throw new Error(data.message || "Unauthorized");
+//     }
+
+//   } catch (error) {
+//     alert(error.message);
+//     window.location.href = "/patient/login";
+//   }
+// });
 
 // Navbar side menu open & close toggler begins here
 
