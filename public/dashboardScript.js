@@ -56,3 +56,18 @@ function openMenu() {
 function closeMenu() {
   sideMenu.style.left = "-200px";
 }
+
+// Avatar Profile begins here
+
+function toggleDropdown() {
+  const dropdown = document.getElementById("dropdownMenu");
+  dropdown.classList.toggle("active");
+}
+
+document.addEventListener("click", function (e) {
+  const dropdown = document.getElementById("dropdownMenu");
+  const profileAvatar = document.querySelector(".user-icon");
+  if (!profileAvatar.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.remove("active");
+  }
+});

@@ -94,8 +94,8 @@ img {
 
 .notification-icon img,
 .user-icon img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
 }
 .button-container {
   display: flex;
@@ -194,9 +194,69 @@ img {
   padding: 15px;
 }
 
+/* Dashboard User Icon DropDown Menu css begin here */
+
+.profile-container {
+  position: relative;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fff;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  width: 200px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.dropdown-menu.active {
+  display: flex;
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-item svg {
+  width: 16px;
+  height: 16px;
+  fill: #555;
+}
+
+/* Dashboard User Icon DropDown Menu css begin here */
+
 .sidebar .fas {
   display: none;
 }
+
 /* Mobile view adjustments */
 @media (max-width: 768px) {
   .sidebar .fas {

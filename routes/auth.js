@@ -7,6 +7,14 @@ const patientsController = require("../controllers/patientsController");
 
 router.post("/patient/register", patientsController.registerPatient);
 router.post("/patient/login", patientsController.loginPatient);
+
+// Define routes for patient profile management
+router.get("/profile/:id", patientsController.getPatientProfile);
+router.put("/profile/:id", patientsController.updatePatientProfile);
+router.get(
+  "/profile/:id/appointments",
+  patientsController.getAppointmentHistory
+);
 // router.post("/appointment/book", appointmentsController.bookAppointment);
 // router.put("/appointment/cancel/:id", appointmentsController.cancelAppointment);
 // router.post("/admin/add-doctor", adminController.addDoctor);
