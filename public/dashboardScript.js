@@ -45,22 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Dashboard unauthorized display alert
-
-// document.addEventListener("DOMContentLoaded", async function () {
-//   try {
-//     const response = await fetch("/api/dashboard");
-//     if (!response.ok) {
-//       const data = await response.json();
-//       throw new Error(data.message || "Unauthorized");
-//     }
-
-//   } catch (error) {
-//     alert(error.message);
-//     window.location.href = "/patient/login";
-//   }
-// });
-
 // Navbar side menu open & close toggler begins here
 
 var sideMenu = document.getElementById("sidemenu");

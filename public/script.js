@@ -145,6 +145,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
       // Disable the submit button to prevent double submission
       const submitButton = loginForm.querySelector('button[type="submit"]');
       submitButton.disabled = true;
@@ -172,7 +177,7 @@ document.addEventListener("DOMContentLoaded", function () {
           loginForm.reset(); // Clear the form on success
 
           // Store user data in localStorage
-          // localStorage.setItem("patient", JSON.stringify(data));
+          localStorage.setItem("patient", JSON.stringify(data));
 
           // Optional: Redirect to dashboard or home page
           window.location.href = "/dashboard";
@@ -203,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (emailInput) {
     emailInput.addEventListener("blur", function () {
       const email = this.value.trim();
-      if (email && !email.includes("@")) {
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         this.setCustomValidity("Please enter a valid email address");
         this.reportValidity();
       } else {
