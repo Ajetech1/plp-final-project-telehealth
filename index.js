@@ -33,9 +33,7 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true, // Secure cookies in production
-      httpOnly: true, // Prevent JavaScript access to cookies
-      sameSite: "strict", // Prevent CSRF attacks
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
   })
