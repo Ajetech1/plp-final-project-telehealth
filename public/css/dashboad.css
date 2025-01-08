@@ -238,7 +238,7 @@ img {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .dropdown-item:hover {
@@ -251,8 +251,93 @@ img {
   fill: #555;
 }
 
-/* Dashboard User Icon DropDown Menu css begin here */
+/* Dashboard User Icon DropDown Menu css ends here */
 
+/* Profile Settings page begings here */
+
+.profile-settings-container {
+  background: #fff;
+  padding: 20px;
+  margin-top: 50px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+}
+
+.profile-picture {
+  position: relative;
+}
+
+.profile-picture img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.profile-picture input {
+  position: absolute;
+  bottom: -10px;
+  margin-top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  background: #1d884a;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+form {
+  margin-top: 30px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: none;
+  height: 60px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #1d884a;
+  color: #ffffff;
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background: #45a049;
+}
+#patient-name,
+#phone {
+  font-family: "Poppins-Regular";
+}
 .sidebar .fas {
   display: none;
 }
@@ -308,6 +393,10 @@ img {
     border-radius: 30px;
     text-align: start;
   }
+}
+
+.profile-settings-container {
+  width: 350px;
 }
 
 /* * Show buttons in header only on large screens (e.g., 1024px and above) */

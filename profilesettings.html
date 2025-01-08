@@ -27,7 +27,7 @@
     </div>
     <div class="main-content">
       <header class="header">
-        <h3 class="title">Dashboard</h3>
+        <h3 class="title">Profile Settings</h3>
         <!-- Buttons will appear in header on large screens -->
         <button class="button urgent-care">Urgent Care</button>
         <button class="button book-now">Book Now</button>
@@ -37,7 +37,7 @@
           /></span>
           <div class="profile-container">
             <div class="user-icon" onclick="toggleDropdown()">
-              <img src="public/icons/userIcon.png" alt="User-image" />
+              <img src="public/icons/userIcon.png" id="" alt="User-image" />
             </div>
             <div class="dropdown-menu" id="dropdownMenu">
               <a href="/" class="dropdown-item">
@@ -69,31 +69,53 @@
         <button class="button urgent-care">Urgent Care</button>
         <button class="button book-now">Book Now</button>
       </div>
-      <div class="stats-container">
-        <div class="welcome">
-          <p>Hi, <span id="patient-name-display"></span></p>
+
+      <div class="profile-settings-container">
+        <div class="profile-picture">
+          <img
+            id="profile-image"
+            src="public/icons/profileIcon.png"
+            alt="Profile Picture"
+          />
+          <input
+            type="file"
+            id="image-upload"
+            accept="image/*"
+            onchange="loadImage(event)"
+          />
         </div>
-        <div class="stats">
-          <div class="stat-box blue">
-            <h4>New</h4>
-            <h5>Consultation Requests</h5>
-            <p>0</p>
-          </div>
-          <div class="stat-box orange">
-            <h4>New</h4>
-            <h5>Appointment Requests</h5>
-            <p>0</p>
-          </div>
-          <div class="stat-box green">
-            <h4>Total</h4>
-            <h5>Consultations</h5>
-            <p>0</p>
-          </div>
-        </div>
-      </div>
-      <div class="notifications">
-        <h2>Don't Forget</h2>
-        <p>No new notifications to note</p>
+        <form
+          action="/update-profile"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <label for="name">Name</label>
+          <input type="text" id="patient-name" name="name" required="" />
+
+          <label for="phone"
+            >Phone number where the doctor can contact you</label
+          >
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="Add Phone Number"
+            required
+          />
+
+          <label for="about">About yourself</label>
+          <textarea
+            id="about"
+            name="about"
+            placeholder="Write something about yourself"
+          ></textarea>
+
+          <input
+            type="submit"
+            value="Update Personal Info"
+            class="submit-btn"
+          />
+        </form>
       </div>
     </div>
     <script src="public/dashboardScript.js"></script>

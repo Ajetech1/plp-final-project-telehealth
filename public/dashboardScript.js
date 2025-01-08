@@ -8,9 +8,29 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (response.status === 200) {
       const patient = await response.json();
-      document.getElementById(
-        "user-name"
-      ).textContent = `${patient.first_name} ${patient.last_name}`;
+      const fullName = `${patient.first_name} ${patient.last_name}`;
+      const phoneNumber = patient.phone;
+
+      // Check the current page and apply the appropriate logic
+      if (window.location.pathname.includes("/dashboard")) {
+        // For dashboard.html, update textContent
+        const patientNameElement = document.getElementById(
+          "patient-name-display"
+        );
+        if (patientNameElement) {
+          patientNameElement.textContent = fullName;
+        }
+      } else if (window.location.pathname.includes("profilesettings.html")) {
+        // For profilesetting.html, update the value of the input field
+        const patientNameInput = document.getElementById("patient-name");
+        const phoneNumberInput = document.getElementById("phone");
+        if (patientNameInput) {
+          patientNameInput.value = fullName;
+        }
+        if (phoneNumberInput) {
+          phoneNumberInput.value = phoneNumber;
+        }
+      }
     } else {
       const data = await response.json();
       throw new Error(data.message || "Unauthorized");
@@ -71,3 +91,9 @@ document.addEventListener("click", function (e) {
     dropdown.classList.remove("active");
   }
 });
+
+// Profile settings page begins here
+function loadImage(event) {
+  const image = document.getElementById("profile-image");
+  image.src = URL.createObjectURL(event.target.files[0]);
+}

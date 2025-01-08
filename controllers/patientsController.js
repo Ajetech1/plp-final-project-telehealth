@@ -82,12 +82,14 @@ exports.loginPatient = async (request, response) => {
       first_name: patient.first_name,
       last_name: patient.last_name,
       email: patient.email,
+      phone: patient.phone,
     };
 
     response.status(200).json({
       message: "Login successful!",
       name: `${patient.first_name} ${patient.last_name}`,
       email: patient.email,
+      phone: patient.phone,
     });
   } catch (error) {
     response.status(500).json({ message: "An error occured!", error });
