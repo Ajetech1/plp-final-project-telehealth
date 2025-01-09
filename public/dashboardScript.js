@@ -1,6 +1,14 @@
 // dashboard script begins here
+
 document.addEventListener("DOMContentLoaded", async function () {
+  const loadingIndicator = document.getElementById("loading-indicator"); // Reference to the loading element
+
   try {
+    // Show the loading indicator
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "block";
+    }
+
     const response = await fetch("/api/dashboard", {
       method: "GET",
       credentials: "include", // Include session cookie
@@ -8,20 +16,25 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (response.status === 200) {
       const patient = await response.json();
-      const fullName = `${patient.first_name} ${patient.last_name}`;
-      const phoneNumber = patient.phone;
+      const fullName = `${patient.first_name || ""} ${
+        patient.last_name || ""
+      }`.trim();
+      const phoneNumber = patient.phone || "";
 
-      // Check the current page and apply the appropriate logic
-      if (window.location.pathname.includes("/dashboard")) {
-        // For dashboard.html, update textContent
+      const currentPath = window.location.pathname;
+
+      // Handle different pages
+      if (currentPath === "/dashboard") {
         const patientNameElement = document.getElementById(
           "patient-name-display"
         );
         if (patientNameElement) {
           patientNameElement.textContent = fullName;
         }
-      } else if (window.location.pathname.includes("profilesettings.html")) {
-        // For profilesetting.html, update the value of the input field
+      } else if (
+        currentPath === "/dashboard/setting" ||
+        currentPath.includes("profilesettings")
+      ) {
         const patientNameInput = document.getElementById("patient-name");
         const phoneNumberInput = document.getElementById("phone");
         if (patientNameInput) {
@@ -31,17 +44,24 @@ document.addEventListener("DOMContentLoaded", async function () {
           phoneNumberInput.value = phoneNumber;
         }
       }
+    } else if (response.status === 401) {
+      window.location.href = "/patient/login";
     } else {
       const data = await response.json();
-      throw new Error(data.message || "Unauthorized");
+      throw new Error(data.message || "Failed to fetch user details");
     }
   } catch (error) {
     console.error("Error fetching user details:", error);
-    alert(error.message);
-    window.location.href = "/patient/login";
+    alert(error.message || "An unexpected error occurred.");
+  } finally {
+    // Hide the loading indicator
+    if (loadingIndicator) {
+      loadingIndicator.style.display = "none";
+    }
   }
 });
 
+// Logout JavaScript begins here
 document.addEventListener("DOMContentLoaded", function () {
   const logoutButton = document.getElementById("logout-button");
 

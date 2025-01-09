@@ -42,20 +42,6 @@ exports.registerPatient = async (req, res) => {
   }
 };
 
-// exports.loginPatient = async (req, res) => {
-//   const { email, password } = req.body;
-//   const [rows] = await db.execute("SELECT * FROM Patients WHERE email = ?", [
-//     email,
-//   ]);
-//   const patient = rows[0];
-//   if (patient && (await bcrypt.compare(password, patient.password_hash))) {
-//     req.session.patientId = patient.id;
-//     res.send("Login successful");
-//   } else {
-//     res.status(401).send("Invalid credentials");
-//   }
-// };
-
 //user login function
 exports.loginPatient = async (request, response) => {
   const { email, password } = request.body;

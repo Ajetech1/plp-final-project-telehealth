@@ -338,6 +338,30 @@ textarea {
 #phone {
   font-family: "Poppins-Regular";
 }
+
+/* Spinner Css begins here  */
+#loading-indicator {
+  margin-top: 20px;
+}
+.spinner {
+  border: 4px solid #f3f3f3; /* Light grey */
+  border-top: 4px solid #1d884a; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .sidebar .fas {
   display: none;
 }
@@ -396,7 +420,7 @@ textarea {
 }
 
 .profile-settings-container {
-  width: 350px;
+  width: 330px;
 }
 
 /* * Show buttons in header only on large screens (e.g., 1024px and above) */
