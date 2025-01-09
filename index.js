@@ -46,7 +46,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "/")));
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static("uploads"));
 
 // Routes
 app.use("/auth", routes);
@@ -83,37 +83,25 @@ app.get("/api/dashboard", authenticate, (req, res) => {
   res.json(req.session.patient);
 });
 
-// Multer Configuration for Image Upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Folder to store images
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Rename file with timestamp
-  },
-});
+// // API to Handle Form Submission
+// app.post("/update-profile", upload.single("profileImage"), (req, res) => {
+//   const { first_name, last_name, phone, about } = req.body;
+//   const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
-const upload = multer({ storage: storage });
-
-// API to Handle Form Submission
-app.post("/update-profile", upload.single("profileImage"), (req, res) => {
-  const { first_name, last_name, phone, about } = req.body;
-  const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
-
-  // Save user details in the database
-  const sql = `INSERT INTO patients (first_name, last_name, phone, about, image) VALUES (?, ?, ?, ?, ?)`;
-  db.query(
-    sql,
-    [first_name, last_name, phone, about, imagePath],
-    (err, result) => {
-      if (err) {
-        console.error("Error inserting data:", err);
-        return res.status(500).send("Error saving profile data.");
-      }
-      res.status(200).send("Profile updated successfully.");
-    }
-  );
-});
+//   // Save user details in the database
+//   const sql = `INSERT INTO patients (first_name, last_name, phone, about, image) VALUES (?, ?, ?, ?, ?)`;
+//   db.query(
+//     sql,
+//     [first_name, last_name, phone, about, imagePath],
+//     (err, result) => {
+//       if (err) {
+//         console.error("Error inserting data:", err);
+//         return res.status(500).send("Error saving profile data.");
+//       }
+//       res.status(200).send("Profile updated successfully.");
+//     }
+//   );
+// });
 
 // Logout route
 app.post("/logout", (req, res) => {

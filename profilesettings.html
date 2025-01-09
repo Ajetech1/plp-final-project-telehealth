@@ -36,8 +36,8 @@
             ><img src="/public/icons/noti.png" alt=""
           /></span>
           <div class="profile-container">
-            <div class="user-icon" onclick="toggleDropdown()">
-              <img src="/public/icons/userIcon.png" id="" alt="User-image" />
+            <div class="patient-icon" onclick="toggleDropdown()">
+              <img src="/public/icons/userIcon.png" id="" alt="Patient-image" />
             </div>
             <div class="dropdown-menu" id="dropdownMenu">
               <a href="/" class="dropdown-item">
@@ -77,22 +77,25 @@
             src="/public/icons/profileIcon.png"
             alt="Profile Picture"
           />
-          <input
-            type="file"
-            id="image-upload"
-            accept="image/*"
-            onchange="loadImage(event)"
-          />
-        </div>
-        <div id="loading-indicator" style="display: none; text-align: center">
-          <div class="spinner"></div>
-          <p>Loading, please wait...</p>
         </div>
         <form
-          action="/update-profile"
+          action="/auth/api/profile"
           method="POST"
           enctype="multipart/form-data"
         >
+          <input
+            type="file"
+            id="image-upload"
+            name="profilePicture"
+            accept="image/*"
+            onchange="loadImage(event)"
+          />
+
+          <div id="loading-indicator" style="display: none; text-align: center">
+            <div class="spinner"></div>
+            <p>Loading, please wait...</p>
+          </div>
+
           <label for="name">Name</label>
           <input type="text" id="patient-name" name="name" required="" />
 
@@ -111,9 +114,10 @@
           <textarea
             id="about"
             name="about"
+            rows="4"
+            cols="50"
             placeholder="Write something about yourself"
           ></textarea>
-
           <input
             type="submit"
             value="Update Personal Info"

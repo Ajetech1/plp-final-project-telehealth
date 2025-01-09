@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       loadingIndicator.style.display = "block";
     }
 
+    // Fetch patient data from the API
     const response = await fetch("/api/dashboard", {
       method: "GET",
       credentials: "include", // Include session cookie
@@ -16,12 +17,21 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (response.status === 200) {
       const patient = await response.json();
+
       const fullName = `${patient.first_name || ""} ${
         patient.last_name || ""
       }`.trim();
       const phoneNumber = patient.phone || "";
+      const profileImage = patient.image || "/public/icons/profileIcon.png"; // Default profile image
+      const about = patient.about || "";
 
       const currentPath = window.location.pathname;
+
+      // Update the navigation bar profile picture
+      const patientIconImage = document.querySelector(".patient-icon img");
+      if (patientIconImage) {
+        patientIconImage.src = profileImage; // Update the user icon image in the navigation bar
+      }
 
       // Handle different pages
       if (currentPath === "/dashboard") {
@@ -35,16 +45,27 @@ document.addEventListener("DOMContentLoaded", async function () {
         currentPath === "/dashboard/setting" ||
         currentPath.includes("profilesettings")
       ) {
+        // Update profile settings page
         const patientNameInput = document.getElementById("patient-name");
         const phoneNumberInput = document.getElementById("phone");
+        const profileImageElement = document.getElementById("profile-image"); // Element to display image
+        const aboutInput = document.getElementById("about");
+
         if (patientNameInput) {
           patientNameInput.value = fullName;
         }
         if (phoneNumberInput) {
           phoneNumberInput.value = phoneNumber;
         }
+        if (profileImageElement) {
+          profileImageElement.src = profileImage; // Set the image source
+        }
+        if (aboutInput) {
+          aboutInput.value = about;
+        }
       }
     } else if (response.status === 401) {
+      // Redirect to login if not authorized
       window.location.href = "/patient/login";
     } else {
       const data = await response.json();
@@ -106,7 +127,7 @@ function toggleDropdown() {
 
 document.addEventListener("click", function (e) {
   const dropdown = document.getElementById("dropdownMenu");
-  const profileAvatar = document.querySelector(".user-icon");
+  const profileAvatar = document.querySelector(".patient-icon");
   if (!profileAvatar.contains(e.target) && !dropdown.contains(e.target)) {
     dropdown.classList.remove("active");
   }

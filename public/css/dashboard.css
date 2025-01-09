@@ -93,9 +93,11 @@ img {
 }
 
 .notification-icon img,
-.user-icon img {
+.patient-icon img {
   width: 25px;
   height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 .button-container {
   display: flex;
@@ -277,21 +279,6 @@ img {
   border: 2px solid #ddd;
 }
 
-.profile-picture input {
-  position: absolute;
-  bottom: -10px;
-  margin-top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  background: #1d884a;
-  color: #fff;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
 form {
   margin-top: 30px;
   text-align: left;
@@ -303,6 +290,19 @@ label {
   display: block;
 }
 
+#image-upload {
+  position: relative;
+  margin-bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  background: #1d884a;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
 input[type="text"],
 textarea {
   width: 100%;
@@ -315,7 +315,7 @@ textarea {
 
 textarea {
   resize: none;
-  height: 60px;
+  /* height: 60px; */
 }
 
 .submit-btn {
@@ -335,24 +335,27 @@ textarea {
   background: #45a049;
 }
 #patient-name,
-#phone {
+#phone,
+#about {
   font-family: "Poppins-Regular";
 }
 
 /* Spinner Css begins here  */
 #loading-indicator {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 .spinner {
   border: 4px solid #f3f3f3; /* Light grey */
   border-top: 4px solid #1d884a; /* Blue */
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   animation: spin 1s linear infinite;
   margin: 0 auto;
 }
-
+#loading-indicator p {
+  font-size: 10px;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);

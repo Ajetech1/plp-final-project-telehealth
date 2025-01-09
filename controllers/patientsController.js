@@ -69,6 +69,8 @@ exports.loginPatient = async (request, response) => {
       last_name: patient.last_name,
       email: patient.email,
       phone: patient.phone,
+      about: patient.about,
+      image: patient.image,
     };
 
     response.status(200).json({
@@ -76,6 +78,8 @@ exports.loginPatient = async (request, response) => {
       name: `${patient.first_name} ${patient.last_name}`,
       email: patient.email,
       phone: patient.phone,
+      about: patient.about,
+      image: patient.image,
     });
   } catch (error) {
     response.status(500).json({ message: "An error occured!", error });
@@ -99,24 +103,51 @@ exports.getPatientProfile = (req, res) => {
   });
 };
 
-// Update patient profile
-exports.updatePatientProfile = (req, res) => {
-  const patientId = req.params.id;
-  const { name, email, phone, address } = req.body;
-  const query =
-    "UPDATE patients SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?";
-  db.query(query, [name, email, phone, address, patientId], (err, results) => {
-    if (err) {
-      return res
-        .status(500)
-        .json({ message: "Error updating profile", error: err });
-    }
-    if (results.affectedRows === 0) {
+// Patient can Update their profile picture and About field (authenticated session required)
+exports.updatePatientProfile = async (req, res) => {
+  if (!req.session.patient) {
+    return res.status(401).json({ message: "Unauthorized. Please log in." });
+  }
+  const { about } = req.body;
+  const profilePicture = req.file ? `/uploads/${req.file.filename}` : null; // Get the path to the uploaded image
+
+  try {
+    const sql = "UPDATE patients SET image = ?, about = ? WHERE id = ?";
+    const [result] = await db.execute(sql, [
+      profilePicture,
+      about,
+      req.session.patient.id,
+    ]);
+
+    if (result.affectedRows === 0) {
       return res.status(404).json({ message: "Patient not found" });
     }
+
     res.json({ message: "Profile updated successfully" });
-  });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
 };
+
+// // Update patient profile
+// exports.updatePatientProfile = (req, res) => {
+//   const patientId = req.params.id;
+//   const { name, email, phone, address } = req.body;
+//   const query =
+//     "UPDATE patients SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?";
+//   db.query(query, [name, email, phone, address, patientId], (err, results) => {
+//     if (err) {
+//       return res
+//         .status(500)
+//         .json({ message: "Error updating profile", error: err });
+//     }
+//     if (results.affectedRows === 0) {
+//       return res.status(404).json({ message: "Patient not found" });
+//     }
+//     res.json({ message: "Profile updated successfully" });
+//   });
+// };
 
 // Get appointment history for a patient
 exports.getAppointmentHistory = (req, res) => {
