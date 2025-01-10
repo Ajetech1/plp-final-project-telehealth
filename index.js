@@ -1,26 +1,26 @@
 require("dotenv").config();
 const express = require("express");
-const multer = require("multer");
 const path = require("path");
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const bodyParser = require("body-parser");
 const routes = require("./routes/auth");
-const mysql = require("serverless-mysql");
+// const mysql = require("serverless-mysql");
+const db = require("./config/db");
 
 // Initialize the Express app
 const app = express();
 
-// Configure serverless MySQL
-const db = mysql({
-  config: {
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 3306, // Default MySQL port
-  },
-});
+// // Configure serverless MySQL
+// const db = mysql({
+//   config: {
+//     host: process.env.DB_HOST,
+//     database: process.env.DB_NAME,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     port: process.env.DB_PORT || 3306, // Default MySQL port
+//   },
+// });
 
 // Configure the session store
 const sessionStore = new MySQLStore({}, db);
@@ -83,26 +83,6 @@ app.get("/api/dashboard", authenticate, (req, res) => {
   res.json(req.session.patient);
 });
 
-// // API to Handle Form Submission
-// app.post("/update-profile", upload.single("profileImage"), (req, res) => {
-//   const { first_name, last_name, phone, about } = req.body;
-//   const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
-
-//   // Save user details in the database
-//   const sql = `INSERT INTO patients (first_name, last_name, phone, about, image) VALUES (?, ?, ?, ?, ?)`;
-//   db.query(
-//     sql,
-//     [first_name, last_name, phone, about, imagePath],
-//     (err, result) => {
-//       if (err) {
-//         console.error("Error inserting data:", err);
-//         return res.status(500).send("Error saving profile data.");
-//       }
-//       res.status(200).send("Profile updated successfully.");
-//     }
-//   );
-// });
-
 // Logout route
 app.post("/logout", (req, res) => {
   req.session.destroy((err) => {
@@ -120,5 +100,5 @@ app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
 
-// Ensure the database connection is closed after each request (important for serverless)
-process.on("exit", () => db.end());
+// // Ensure the database connection is closed after each request (important for serverless)
+// process.on("exit", () => db.end());
