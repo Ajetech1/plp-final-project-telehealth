@@ -1,15 +1,12 @@
 // dashboard script begins here
-
 document.addEventListener("DOMContentLoaded", async function () {
-  const loadingIndicator = document.getElementById("loading-indicator"); // Reference to the loading element
+  const loadingIndicator = document.getElementById("loading-indicator");
 
   try {
-    // Show the loading indicator
     if (loadingIndicator) {
       loadingIndicator.style.display = "block";
     }
 
-    // Fetch patient data from the API
     const response = await fetch("/api/dashboard", {
       method: "GET",
       credentials: "include", // Include session cookie
@@ -26,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       const about = patient.about || "";
 
       const currentPath = window.location.pathname;
-
       // Update the navigation bar profile picture
       const patientIconImage = document.querySelector(".patient-icon img");
       if (patientIconImage) {
@@ -45,10 +41,9 @@ document.addEventListener("DOMContentLoaded", async function () {
         currentPath === "/dashboard/setting" ||
         currentPath.includes("profilesettings")
       ) {
-        // Update profile settings page
         const patientNameInput = document.getElementById("patient-name");
         const phoneNumberInput = document.getElementById("phone");
-        const profileImageElement = document.getElementById("profile-image"); // Element to display image
+        const profileImageElement = document.getElementById("profile-image");
         const aboutInput = document.getElementById("about");
 
         if (patientNameInput) {
@@ -58,14 +53,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           phoneNumberInput.value = phoneNumber;
         }
         if (profileImageElement) {
-          profileImageElement.src = profileImage; // Set the image source
+          profileImageElement.src = profileImage; // Correctly set the Cloudinary URL
         }
         if (aboutInput) {
           aboutInput.value = about;
         }
       }
     } else if (response.status === 401) {
-      // Redirect to login if not authorized
       window.location.href = "/patient/login";
     } else {
       const data = await response.json();
@@ -75,7 +69,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error fetching user details:", error);
     alert(error.message || "An unexpected error occurred.");
   } finally {
-    // Hide the loading indicator
     if (loadingIndicator) {
       loadingIndicator.style.display = "none";
     }

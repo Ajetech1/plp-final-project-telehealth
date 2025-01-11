@@ -108,8 +108,9 @@ exports.updatePatientProfile = async (req, res) => {
   if (!req.session.patient) {
     return res.status(401).json({ message: "Unauthorized. Please log in." });
   }
+
   const { about } = req.body;
-  const profilePicture = req.file ? `/uploads/${req.file.filename}` : null; // Get the path to the uploaded image
+  const profilePicture = req.file ? req.file.path : null; // Cloudinary's URL is available in req.file.path
 
   try {
     const sql = "UPDATE patients SET image = ?, about = ? WHERE id = ?";
