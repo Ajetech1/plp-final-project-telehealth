@@ -29,9 +29,8 @@ body {
 
 .sidebar {
   width: 10%;
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 10px;
-  /* box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); */
 }
 
 .logo {
@@ -42,7 +41,7 @@ body {
 
 img {
   height: 50px;
-  width: 150px;
+  width: 180px;
 }
 
 .nav {
@@ -258,11 +257,15 @@ img {
 /* Profile Settings page begings here */
 
 .profile-settings-container {
+  height: 80vh; /* Takes 80% of viewport height */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
   background: #fff;
   padding: 20px;
   margin-top: 50px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   width: 400px;
   text-align: center;
 }
@@ -424,6 +427,7 @@ textarea {
 
 .profile-settings-container {
   width: 330px;
+  margin-top: 20px;
 }
 
 /* * Show buttons in header only on large screens (e.g., 1024px and above) */

@@ -1,3 +1,5 @@
+// Sign up Java Script begins here
+
 document.addEventListener("DOMContentLoaded", function () {
   const registrationForm = document.getElementById("frm-register");
 
@@ -6,14 +8,38 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  const submitButton = registrationForm.querySelector("button[type='submit']");
+  const emailInput = document.getElementById("email");
+  const emailError = document.createElement("span");
+  emailError.style.color = "red";
+  emailError.style.fontSize = "small";
+  emailError.style.display = "none";
+  emailError.textContent = "Invalid email format.";
+  emailInput.parentNode.insertBefore(emailError, emailInput.nextSibling);
+
+  // Real-time email validation
+  emailInput.addEventListener("input", function () {
+    const emailValue = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailValue)) {
+      emailError.style.display = "block";
+    } else {
+      emailError.style.display = "none";
+    }
+  });
+
   registrationForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     try {
+      // Disable the submit button to prevent double submission
+      submitButton.disabled = true;
+      submitButton.textContent = "Loading...";
+
       // Get form inputs
       const first_name = document.getElementById("first_name");
       const last_name = document.getElementById("last_name");
-      const email = document.getElementById("email");
       const password = document.getElementById("password");
       const confirm_password = document.getElementById("confirm_password");
       const phone = document.getElementById("phone");
@@ -25,6 +51,8 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       if (!genderInput) {
         alert("Please select a gender");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return;
       }
       const gender = genderInput.value;
@@ -36,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!month || !day || !year) {
         alert("Please provide a complete date of birth");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return;
       }
 
@@ -45,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Get input values and trim whitespace
       const firstValue = first_name.value.trim();
       const lastValue = last_name.value.trim();
-      const emailValue = email.value.trim();
+      const emailValue = emailInput.value.trim();
       const passwordValue = password.value;
       const confirmpasswordValue = confirm_password.value;
       const phoneValue = phone.value;
@@ -62,17 +92,32 @@ document.addEventListener("DOMContentLoaded", function () {
         !addressValue
       ) {
         alert("All fields are required");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return;
       }
 
-      // Validate password comfirmation
+      // Ensure the email format is valid
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailValue)) {
+        alert("Invalid email format. Please provide a valid email address.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
+        return;
+      }
+
+      // Validate password confirmation
       if (passwordValue !== confirmpasswordValue) {
         alert("Passwords do not match. Please try again.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return; // Ensure the form submission is stopped
       }
 
       if (passwordValue.length < 6) {
         alert("Password must be at least 6 characters long");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return;
       }
 
@@ -99,6 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const errorText = await response.text();
         console.error("Server error response:", errorText);
         alert("Registration failed. Please try again.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Save and Continue";
         return;
       }
 
@@ -106,9 +153,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
       alert(data.message);
       registrationForm.reset(); // Clear the form on success
+      window.location.href = "/patient/login"; // Redirect to login page
     } catch (error) {
       console.error("Registration error:", error);
       alert(`An error occurred during registration. Details: ${error.message}`);
+      submitButton.disabled = false;
+      submitButton.textContent = "Save and Continue";
     }
   });
 });
@@ -179,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
           // Store user data in localStorage
           localStorage.setItem("patient", JSON.stringify(data));
 
-          // Optional: Redirect to dashboard or home page
+          // Redirect to dashboard or home page
           window.location.href = "/dashboard";
         } else {
           alert(
@@ -203,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Optional: Add real-time email validation
+  // Add real-time email validation
   const emailInput = document.getElementById("email");
   if (emailInput) {
     emailInput.addEventListener("blur", function () {

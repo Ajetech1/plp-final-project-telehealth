@@ -14,7 +14,7 @@
     <div class="sidebar">
       <ul class="nav" id="sidemenu">
         <div class="logo">
-          <a href="/"><img src="/public/img/nav-logo.svg" alt="logo" /></a>
+          <a href="/"><img src="/public/icons/nav-logo.png" alt="logo" /></a>
         </div>
         <li><a href="/dashboard">Dashboard</a></li>
         <li><a href="#">Consultation</a></li>
@@ -126,6 +126,36 @@
         </form>
       </div>
     </div>
+    <script>
+      // Patient Profile update setting
+      const form = document.querySelector("form[action='/auth/api/profile']");
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            credentials: "include", // Include cookies for authentication
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            alert(data.message); // Show success message
+            window.location.reload(); // Reload the page
+          } else {
+            const errorData = await response.json();
+            alert(errorData.message || "Failed to update profile");
+          }
+        } catch (error) {
+          console.error("Error updating profile:", error);
+          alert("An unexpected error occurred. Please try again.");
+        }
+      });
+    </script>
     <script src="/public/dashboardScript.js"></script>
   </body>
 </html>
