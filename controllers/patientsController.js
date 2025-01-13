@@ -131,25 +131,6 @@ exports.updatePatientProfile = async (req, res) => {
   }
 };
 
-// // Update patient profile
-// exports.updatePatientProfile = (req, res) => {
-//   const patientId = req.params.id;
-//   const { name, email, phone, address } = req.body;
-//   const query =
-//     "UPDATE patients SET name = ?, email = ?, phone = ?, address = ? WHERE id = ?";
-//   db.query(query, [name, email, phone, address, patientId], (err, results) => {
-//     if (err) {
-//       return res
-//         .status(500)
-//         .json({ message: "Error updating profile", error: err });
-//     }
-//     if (results.affectedRows === 0) {
-//       return res.status(404).json({ message: "Patient not found" });
-//     }
-//     res.json({ message: "Profile updated successfully" });
-//   });
-// };
-
 // Get appointment history for a patient
 exports.getAppointmentHistory = (req, res) => {
   const patientId = req.params.id;

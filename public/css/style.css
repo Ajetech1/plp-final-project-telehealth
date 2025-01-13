@@ -19,13 +19,13 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000; /* Ensures the header stays above other elements */
-  box-shadow: 0 4px 2px -2px gray; /* Adds a shadow to give it some separation */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow to give it some separation */
   background-color: #fff;
   padding: 0px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 5%;
+  /* margin: 0 5%; */
 }
 
 nav ul li {
@@ -346,7 +346,7 @@ h2 {
   position: relative;
 }
 
-.footer .logo {
+.footer .footer-logo {
   display: flex;
   justify-content: center;
   align-items: center;

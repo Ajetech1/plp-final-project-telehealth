@@ -132,10 +132,6 @@ img {
   display: none;
 }
 
-.urgent-care {
-  margin-right: 10px;
-}
-
 .welcome p {
   font-size: 24px;
   margin-left: 10px;
@@ -260,14 +256,10 @@ img {
   height: 80vh; /* Takes 80% of viewport height */
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 20px;
   background: #fff;
-  padding: 20px;
-  margin-top: 50px;
-  border-radius: 8px;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-  width: 400px;
-  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  text-align: left;
 }
 
 .profile-picture {
@@ -296,8 +288,6 @@ label {
 #image-upload {
   position: relative;
   margin-bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
   cursor: pointer;
   background: #1d884a;
   color: #fff;
@@ -308,7 +298,7 @@ label {
 }
 input[type="text"],
 textarea {
-  width: 100%;
+  width: 60%;
   padding: 15px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -318,11 +308,10 @@ textarea {
 
 textarea {
   resize: none;
-  /* height: 60px; */
 }
 
 .submit-btn {
-  width: 100%;
+  width: 60%;
   padding: 15px;
   background-color: #1d884a;
   color: #ffffff;
@@ -373,7 +362,7 @@ textarea {
 }
 
 /* Mobile view adjustments */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .sidebar .fas {
     display: block;
     font-size: 25px;
@@ -383,10 +372,14 @@ textarea {
   header {
     margin: 0 6%;
   }
-
+  .button {
+    padding: 10px 10px;
+    font-size: 14px;
+  }
   .sidebar .fa-bars {
     position: relative;
     top: 15px;
+    left: 20px;
   }
 
   .sidebar ul {
@@ -434,11 +427,22 @@ textarea {
     border-radius: 30px;
     text-align: start;
   }
-}
 
-.profile-settings-container {
-  width: 330px;
-  margin-top: 20px;
+  /* profile settings page mobile begins here */
+  .profile-settings-container {
+    width: 280px;
+  }
+  #image-upload {
+    padding: 6px 3px;
+  }
+  input[type="text"],
+  textarea,
+  #image-upload {
+    width: 90%;
+  }
+  .submit-btn {
+    width: 90%;
+  }
 }
 
 /* * Show buttons in header only on large screens (e.g., 1024px and above) */

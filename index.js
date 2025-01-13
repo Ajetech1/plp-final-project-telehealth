@@ -5,22 +5,10 @@ const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session);
 const bodyParser = require("body-parser");
 const routes = require("./routes/auth");
-// const mysql = require("serverless-mysql");
 const db = require("./config/db");
 
 // Initialize the Express app
 const app = express();
-
-// // Configure serverless MySQL
-// const db = mysql({
-//   config: {
-//     host: process.env.DB_HOST,
-//     database: process.env.DB_NAME,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASSWORD,
-//     port: process.env.DB_PORT || 3306, // Default MySQL port
-//   },
-// });
 
 // Configure the session store
 const sessionStore = new MySQLStore({}, db);
@@ -99,6 +87,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () =>
   console.log(`Server running on http://localhost:${PORT}`)
 );
-
-// // Ensure the database connection is closed after each request (important for serverless)
-// process.on("exit", () => db.end());
