@@ -131,3 +131,42 @@ function loadImage(event) {
   const image = document.getElementById("profile-image");
   image.src = URL.createObjectURL(event.target.files[0]);
 }
+
+// Patient Profile update setting JavaScript
+const form = document.querySelector("form[action='/auth/api/profile']");
+const submitButton = form.querySelector("button[type='submit']"); // Find the submit button
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault(); // Prevent default form submission behavior
+
+  // Disable the button and change text to indicate the ongoing operation
+  submitButton.disabled = true;
+  const originalText = submitButton.textContent;
+  submitButton.textContent = "Updating, Please wait...";
+
+  const formData = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      credentials: "include", // Include cookies for authentication
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      alert(data.message); // Show success message
+      window.location.reload(); // Reload the page
+    } else {
+      const errorData = await response.json();
+      alert(errorData.message || "Failed to update profile");
+    }
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    alert("An unexpected error occurred. Please try again.");
+  } finally {
+    // Re-enable the button and restore the original text
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
+});

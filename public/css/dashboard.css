@@ -377,7 +377,18 @@ textarea {
   .sidebar .fas {
     display: block;
     font-size: 25px;
+    color: #1d884a;
   }
+
+  header {
+    margin: 0 6%;
+  }
+
+  .sidebar .fa-bars {
+    position: relative;
+    top: 15px;
+  }
+
   .sidebar ul {
     background: #fff;
     position: fixed;
@@ -401,7 +412,7 @@ textarea {
 
   .sidebar ul .fas {
     position: absolute;
-    top: 20px;
+    top: 25px;
     left: 45px;
     cursor: pointer;
   }

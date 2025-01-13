@@ -405,6 +405,11 @@ nav .fas {
   nav .fas {
     display: block;
     font-size: 25px;
+    color: #1d884a;
+  }
+
+  .logo img {
+    content: url("/public/icons/mobile-logo.png"); /* Path to the mobile version of the logo */
   }
   header {
     margin: 0 1%;
